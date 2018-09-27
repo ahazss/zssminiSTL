@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="stl_construct.h" />
     <ClInclude Include="zss_allocator.h" />
   </ItemGroup>
   <ItemGroup>

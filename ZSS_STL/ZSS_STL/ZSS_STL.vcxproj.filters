@@ -18,6 +18,9 @@
     <ClInclude Include="zss_allocator.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="stl_construct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="allocator_test.cpp">
