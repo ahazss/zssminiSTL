@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClInclude Include="stl_alloc.h" />
     <ClInclude Include="stl_construct.h" />
+    <ClInclude Include="stl_uninitialized.h" />
     <ClInclude Include="zss_allocator.h" />
   </ItemGroup>
   <ItemGroup>
