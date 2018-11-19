@@ -1,5 +1,6 @@
 #pragma once
 #include"stl_construct.h"
+#include<string>
 
 //uninitialized_copy
 template<typename InputIterator,typename ForwardIterator>
@@ -44,14 +45,14 @@ ForwardIterator __uninitialized_copy_aux(InputIterator first, InputIterator last
 inline char* uninitialized_copy(const char* first, const char* last,
 	                            char* result)
 {
-	memove(result, first, last - first);
+	memmove(result, first, last - first);
 	return result + (last - first);
 }
 
 inline wchar_t* uninitialized_copy(const wchar_t* first, const wchar_t* last,
 	                               wchar_t* result)
 {
-	memove(result, first, sizeof(wchar_t)*(last - first));
+	memmove(result, first, sizeof(wchar_t)*(last - first));
 	return result + (last - first);
 }
 
