@@ -117,6 +117,16 @@ ForwardIterator __uninitialized_fill_n_aux(ForwardIterator first, Size n, const 
 	return fill_n(first, n, x);               //交由高阶函数执行
 }
 
+//fill_n 定义在<stl_algobase.h>中
+/*
+template<typename OutputIterator, typename Size, typename T>
+OutputIterator fill_n(OutputIterator first, Size n, const T& value) {
+   for( ; n > 0; --n,++first)
+      *first=value;
+   return first;
+}
+*/
+
 //如果不是POD型别，执行流程则会转到以下函数，这是藉由function template的参数推导机制而得
 template<typename ForwardIterator, typename Size, typename T>
 ForwardIterator __uninitialized_fill_n_aux(ForwardIterator first, Size n, const T& x, __false_type)
