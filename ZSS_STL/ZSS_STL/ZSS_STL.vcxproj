@@ -115,15 +115,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="stl_alloc.h" />
-    <ClInclude Include="stl_construct.h" />
-    <ClInclude Include="stl_iterator.h" />
-    <ClInclude Include="stl_uninitialized.h" />
-    <ClInclude Include="type_traits.h" />
+    <ClInclude Include="zss_alloc.h" />
+    <ClInclude Include="zss_construct.h" />
+    <ClInclude Include="zss_iterator.h" />
+    <ClInclude Include="zss_uninitialized.h" />
+    <ClInclude Include="zss_type_traits.h" />
     <ClInclude Include="zss_allocator.h" />
+    <ClInclude Include="zss_vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="allocator_test.cpp" />
+    <ClCompile Include="zss_vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

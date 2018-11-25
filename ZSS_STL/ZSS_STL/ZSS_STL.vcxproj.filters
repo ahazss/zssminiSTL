@@ -18,24 +18,30 @@
     <ClInclude Include="zss_allocator.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="stl_construct.h">
+    <ClInclude Include="zss_vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="stl_alloc.h">
+    <ClInclude Include="zss_alloc.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="stl_uninitialized.h">
+    <ClInclude Include="zss_construct.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="stl_iterator.h">
+    <ClInclude Include="zss_uninitialized.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="type_traits.h">
+    <ClInclude Include="zss_iterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="zss_type_traits.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="allocator_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="zss_vector.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
