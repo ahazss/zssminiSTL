@@ -1,5 +1,6 @@
 #pragma once
 #include"zss_construct.h"
+#include"zss_type_traits.h"
 #include<string>
 
 //uninitialized_copy
@@ -25,7 +26,7 @@ template<typename InputIterator, typename ForwardIterator>
 ForwardIterator __uninitialized_copy_aux(InputIterator first, InputIterator last,
 	                                     ForwardIterator result,__true_type)
 {
-	return copy(first, last, result);           //调用高级算法copy()
+	return std::copy(first, last, result);           //调用高级算法copy()
 }
 
 template<typename InputIterator, typename ForwardIterator>
@@ -99,7 +100,7 @@ ForwardIterator uninitialized_fill_n(ForwardIterator first, Size n, const T& x)
 	return __uninitialized_fill_n(first, n, x, value_type(first));
 }
 
-template<typename ForwardIterator, typename Size, typename T，typename T1>
+template<typename ForwardIterator, typename Size, typename T,typename T1>
 ForwardIterator __uninitialized_fill_n(ForwardIterator first, Size n, const T& x, T1*)
 {
 	//T1在这里是value type
@@ -114,7 +115,7 @@ ForwardIterator __uninitialized_fill_n(ForwardIterator first, Size n, const T& x
 template<typename ForwardIterator, typename Size, typename T>
 ForwardIterator __uninitialized_fill_n_aux(ForwardIterator first, Size n, const T& x, __true_type)
 {
-	return fill_n(first, n, x);               //交由高阶函数执行
+	return std::fill_n(first, n, x);               //交由高阶函数执行
 }
 //fill_n 定义在<stl_algobase.h>中
 /*

@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -124,7 +125,8 @@
     <ClInclude Include="zss_vector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="allocator_test.cpp" />
+    <ClCompile Include="vector_test.cpp" />
+    <ClCompile Include="zss_alloc.cpp" />
     <ClCompile Include="zss_vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

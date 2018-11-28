@@ -40,7 +40,7 @@ public:
 	iterator begin() { return start; }                                       //一般的iterator类型为 vector<xxx>::iterator 
 	iterator end()   { return finish; }                                      //实际上指的还是指针，但此时因为typedef不用自己写类型
 	size_type size() const       { return size_type(end() - begin()); }
-	size_type capacity() const   { return size_type(end_of_storage() - begin()); }
+	size_type capacity() const { return size_type(end_of_storage() - begin()); }
 	bool empty() const           { return begin() == end(); }
 	reference operator[](size_type n) { return *(begin() + n); }                      //编译器根据指针的类型来进行加减运算
 
@@ -49,6 +49,13 @@ public:
 	vector(int n, const T& value)                    { fill_initialize(n, value); }
 	vector(long n, const T& value)                   { fill_initialize(n, value); }   //为什么要把开辟数组的大小都转换为size_t，用long不会装不下吗？？？
 	explicit vector(size_type n)                     { fill_initialize(n, T()); }
+
+	vector(iterator first, iterator last) {
+		start = data_allocator::allocate(last-first);
+		uninitialized_copy(first, last, start);
+		finish = start + (last - first);
+		end_of_storage = finish;
+	}
 
 	~vector() {
 		destroy(start, finish);                                      //全局函数，在zss_construct.h中(仅析构)
@@ -75,7 +82,7 @@ public:
 		if (position + 1 != end())                    //position所指的不是尾元素
 			std::copy(position + 1, finish, position);     //后续元素向前移动，copy函数--STL algorithm
 		--finish;
-		destroy(finish);
+		destroy(finish);                              //析构但不释放
 		return position;
 	}
 
@@ -91,9 +98,9 @@ public:
 	
 	void resize(size_type new_size) { resize(new_size, T()); }           //resize定义？？？？？
 	void clear() { erase(begin(), end()); }
-	void insert(iterator first, const T& x);
+	//void insert(iterator first, const T& x);
 	void insert(iterator first, size_type n, const T& x);
-	void insert(iterator first, iterator bfirst, iterator afirst);
+	//void insert(iterator first, iterator bfirst, iterator afirst);
 
 protected:
 	//配置空间并填满内容
@@ -103,6 +110,5 @@ protected:
 		return result;
 	}
 };
-
 
 }
