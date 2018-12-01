@@ -1,2 +1,5 @@
 ﻿  vector_test.cpp
+d:\ministl\zssministl\zss_stl\zss_stl\vector_test.cpp(33): warning C4018: “<”: 有符号/无符号不匹配
+  zss_vector.cpp
+  正在生成代码...
   ZSS_STL.vcxproj -> D:\miniSTL\zssminiSTL\ZSS_STL\Debug\ZSS_STL.exe
