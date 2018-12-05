@@ -119,12 +119,14 @@
     <ClInclude Include="zss_alloc.h" />
     <ClInclude Include="zss_construct.h" />
     <ClInclude Include="zss_iterator.h" />
+    <ClInclude Include="zss_list.h" />
     <ClInclude Include="zss_uninitialized.h" />
     <ClInclude Include="zss_type_traits.h" />
     <ClInclude Include="zss_allocator.h" />
     <ClInclude Include="zss_vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="list_test.cpp" />
     <ClCompile Include="vector_test.cpp" />
     <ClCompile Include="zss_alloc.cpp" />
     <ClCompile Include="zss_vector.cpp" />

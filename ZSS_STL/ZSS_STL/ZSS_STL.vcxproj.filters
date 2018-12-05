@@ -36,6 +36,9 @@
     <ClInclude Include="zss_type_traits.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="zss_list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="zss_vector.cpp">
@@ -45,6 +48,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="zss_alloc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="list_test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
