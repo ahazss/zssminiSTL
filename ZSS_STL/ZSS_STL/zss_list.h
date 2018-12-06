@@ -41,7 +41,7 @@ struct __list_iterator {
 	reference operator* () const { return (*node).data; }
 	
 	//迭代器的成员存取(member access)运算子
-	pointer operator->() const { return &(operator* ()); }           //返回的是结点数据的地址 ？？？？？？
+	pointer operator->() const { return &(operator* ()); }           //迭代器a a->b等价于 *(a).b  在这里是返回数据的地址
 
 	self& operator++ () {                            //前置++
 		node = (link_type)((*node).next);
@@ -81,13 +81,13 @@ public:
 	typedef size_t                    size_type;                         //在32位系统中size_t为4字节，64位系统中为8字节
 	typedef ptrdiff_t                 difference_type;
 	typedef list_node*                link_type;
-	typedef __list_iterator<T,T&,T*>  iterator;                          //所有用iterator的位置再注意一下！！！！！！！              
+	typedef __list_iterator<T,T&,T*>  iterator;                          //iterator类型，定义了++，--前置后置，'解引用'(返回data)，              
 
 	list() { empty_initialize(); }                             //产生一个空链表
 
 
-	iterator begin() { return (link_type)(node->next); }     //??????? 那个->重载??????
-	iterator end()   { return node; }
+	iterator begin() { return (link_type)(node->next); }     //这里的->是结点类中的不是迭代器中的
+	iterator end()   { return node; }                        //返回类型为link_node* 应该会调用迭代器的构造函数   ？？？再测试一下
 	bool empty() const { return node->next == node; }
 	size_type size() const {
 		size_type result = 0;
@@ -110,7 +110,7 @@ public:
 		newnode->prev = position.node->prev;
 		position.node->prev->next = newnode;
 		position.node->prev = newnode;
-		return newnode;
+		return newnode;                                        //这里的iterator应该是会调用迭代器的构造函数
 	}   
 	iterator erase(iterator position)                          //移除迭代器position所指结点
 	{
@@ -118,8 +118,8 @@ public:
 		link_type prev_node = link_type(position.node->prev);
 		prev_node->next = next_node;
 		next_node->prev = prev_node;
-		destroy_node(position.node);                            //只释放结点，迭代器不需要专门释放？？？？？？？
-		return iterator(next_node);
+		destroy_node(position.node);                            //只释放结点，迭代器不需要专门释放(没有开辟额外空间)自己释放
+		return iterator(next_node);                             //调用iterator构造函数，返回一个新迭代器地址
 	}
 	void pop_front() { erase(begin()); }                        //移除头结点
 	void pop_back() {                                           //移除尾结点 尾结点自减然后上面的元素被释放
@@ -127,7 +127,7 @@ public:
 		erase(--tmp);                                           
 	}
 	void remove(const T& x);                                    //将值为x的所有元素删除
-
+	void unique();                                              //移除数值相同的连续元素至只剩一个
 
 
 
@@ -156,6 +156,7 @@ protected:
 		node->next = node;               //头尾均指向自己，不设元素值
 		node->prev = node;
 	}
+	void transfer(iterator position, iterator first, iterator last);    
 };
 
 template<typename T, typename Alloc>
@@ -179,12 +180,42 @@ inline void list<T, Alloc>::remove(const T& x)
 	//所有值等于x的元素都删除
 	iterator first = begin();
 	iterator last = end();
-	while (first != last)
+	while (first != last)                         //这里的!=是重载过的，比较node地址
 	{
 		iterator next = first;
 		++next;
-		if (*first == x) earse(first);            //earse只释放了node，而iterator ？？？？？再理一下！！！ 
-		first = next;
+		if (*first == x) earse(first);            //earse释放了node，构建iterator，iterator改变，即此时first里面的地址为无效地址 
+		first = next;                             //用next给first赋值的含义为使fisrt指向同一个地址，&first和&next在整个过程中是不会改变的	                                    
+	}
+}
+
+template<typename T, typename Alloc>
+inline void list<T, Alloc>::unique() {
+	iterator first = begin();
+	iterator last = end();
+	if (first == last) return;                    //空链表
+	iterator next = first;
+	while ((++next) != next)
+	{
+		if (*first == *next)  erase(next);
+		else first = next;
+		next = first;
+	}
+}
+
+template<typename T,typename Alloc>
+inline void list<T, Alloc>::transfer(iterator position, iterator first, iterator last)
+{
+	//将[first,last)内的所有元素移动到position之前
+	if (position != last)
+	{
+		(*(link_type((*last.node).prev))).next = position.node;
+		(*(link_type((*first.node).prev))).next = last.node;
+		(*(link_type((*position.node).prev))).next = first.node;
+		link_type tmp = link_type((*position.node).prev);
+		(*position.node).prev = (*last.node).prev;
+		(*last.node).prev = (*first.node).prev;
+		(*first.node).prev = tmp;
 	}
 }
 }
