@@ -41,9 +41,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="zss_vector.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="vector_test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

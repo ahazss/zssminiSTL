@@ -129,7 +129,6 @@
     <ClCompile Include="list_test.cpp" />
     <ClCompile Include="vector_test.cpp" />
     <ClCompile Include="zss_alloc.cpp" />
-    <ClCompile Include="zss_vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

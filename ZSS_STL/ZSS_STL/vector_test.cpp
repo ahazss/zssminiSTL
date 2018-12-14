@@ -2,6 +2,7 @@
 #include<vector>
 using namespace ZSS;
 
+/*
 int main()
 {
 	//实现的操作
@@ -35,4 +36,4 @@ int main()
 	a5 == a4;                                     //a4为向量，向量的比较操作还有!=,>=,<=,>,<
 	a4.swap(a5);                                  //a5为向量，将a中的元素和b中的元素进行整体性交换
 	
-}
+}*/

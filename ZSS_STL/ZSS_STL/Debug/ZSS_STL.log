@@ -1,5 +1,3 @@
-﻿  vector_test.cpp
-d:\ministl\zssministl\zss_stl\zss_stl\vector_test.cpp(39): warning C4018: “<”: 有符号/无符号不匹配
-  zss_vector.cpp
-  正在生成代码...
+﻿  list_test.cpp
+d:\ministl\zssministl\zss_stl\zss_stl\zss_list.h(53): warning C4172: 返回局部变量或临时变量的地址: tmp
   ZSS_STL.vcxproj -> D:\miniSTL\zssminiSTL\ZSS_STL\Debug\ZSS_STL.exe

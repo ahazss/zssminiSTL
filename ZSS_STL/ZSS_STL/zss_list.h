@@ -1,7 +1,6 @@
 #pragma once
-#include"zss_iterator.h"
 #include"zss_alloc.h"
-#include"zss_allocator.h"
+#include"zss_construct.h"
 
 namespace ZSS {
 
@@ -41,7 +40,7 @@ struct __list_iterator {
 	reference operator* () const { return (*node).data; }
 	
 	//迭代器的成员存取(member access)运算子
-	pointer operator->() const { return &(operator* ()); }           //迭代器a a->b等价于 *(a).b  在这里是返回数据的地址
+	pointer operator->() const { return &(operator* ()); }           //迭代器a a->b等价于 *(a).b  在这里是返回数据的地址 ?
 
 	self& operator++ () {                            //前置++
 		node = (link_type)((*node).next);
@@ -84,10 +83,34 @@ public:
 	typedef __list_iterator<T,T&,T*>  iterator;                          //iterator类型，定义了++，--前置后置，'解引用'(返回data)，              
 
 	list() { empty_initialize(); }                             //产生一个空链表
+	template<typename iter>
+	list(iter first, iter last)                          //复制[first,last)的内容给list
+	{                       
+		empty_initialize();
+		insert(node, first, last);
+	}
+	list(size_type n, const T& x)                              //n个值为x的链表
+	{                 
+		empty_initialize();
+		insert(node, n, x);
+	}
+	~list(){
+		clear();
+		delete node;
+	}
 
+	void assign(size_type n,const T& x)
+	{
+		insert(node, n, x);
+	}
+	template<typename iter>
+	void assign(iter first, iter last)
+	{
+		insert(node, first, last);
+	}
 
-	iterator begin() { return (link_type)(node->next); }     //这里的->是结点类中的不是迭代器中的
-	iterator end()   { return node; }                        //返回类型为link_node* 应该会调用迭代器的构造函数   ？？？再测试一下
+	iterator begin() const { return (link_type)(node->next); }    //这里的->是结点类中的不是迭代器中的
+	iterator end() const  { return node; }                        //返回类型为link_node*,会调用迭代器的构造函数,end为尾后元素
 	bool empty() const { return node->next == node; }
 	size_type size() const {
 		size_type result = 0;
@@ -102,7 +125,7 @@ public:
 	void push_front(const T& x) { insert(begin(), x); }        //插入一个节点作为头结点
 	void push_back(const T& x) { insert(end(), x); }           //以push_back加入元素时，此函数内部调用insert()
 	iterator insert(iterator position, const T& x)             //插入结点在position之前
-	{            
+	{           
 		//在0 1 2 3 4 中3的位置插入99 结果为 0 1 2 99 3 4
 		//因为是在position插元素前，不用担心更新尾指针
 		link_type newnode = create_node(x);
@@ -112,6 +135,45 @@ public:
 		position.node->prev = newnode;
 		return newnode;                                        //这里的iterator应该是会调用迭代器的构造函数
 	}   
+	iterator insert(iterator position, size_type n, const T& x)
+	{
+		iterator result = position;
+		for (int i = 0; i < n; i++) {
+			result=insert(position, x);
+		}
+		return result;
+	}
+	iterator insert(iterator position, iterator first, iterator last)
+	{
+		link_type result=nullptr;
+		while (first != last)
+		{
+			link_type newnode = create_node(*first);
+			first++;
+			result = newnode;
+			newnode->next = position.node;
+			newnode->prev = position.node->prev;
+			position.node->prev->next = newnode;
+			position.node->prev = newnode;
+		}
+		return result;
+	}
+	iterator insert(iterator position, pointer first, pointer last)
+	{
+		link_type result=nullptr;
+		while (first != last)
+		{
+			link_type newnode = create_node(*first);
+			result = newnode;
+			first++;
+			newnode->next = position.node;
+			newnode->prev = position.node->prev;
+			position.node->prev->next = newnode;
+			position.node->prev = newnode;
+		}
+		return result;
+	}
+
 	iterator erase(iterator position)                          //移除迭代器position所指结点
 	{
 		link_type next_node = link_type(position.node->next);
@@ -121,6 +183,14 @@ public:
 		destroy_node(position.node);                            //只释放结点，迭代器不需要专门释放(没有开辟额外空间)自己释放
 		return iterator(next_node);                             //调用iterator构造函数，返回一个新迭代器地址
 	}
+	iterator erase(iterator first, iterator last) {
+		while (first != last) 
+		{
+			erase(first);
+			first++;
+		}
+		return last;
+	}
 	void pop_front() { erase(begin()); }                        //移除头结点
 	void pop_back() {                                           //移除尾结点 尾结点自减然后上面的元素被释放
 		iterator tmp = end();
@@ -128,7 +198,15 @@ public:
 	}
 	void remove(const T& x);                                    //将值为x的所有元素删除
 	void unique();                                              //移除数值相同的连续元素至只剩一个
+	//这里的splice还有&&重载
+	void splice(iterator position, list<T>& right);             //接和操作，将right接到position之前
+	void splice(iterator position, iterator i);                 //接和操作，将i所指元素接到position之前
+	void splice(iterator position, iterator first, iterator last);  //接和操作，将first到last元素接到position之前
 
+	void sort();                                                    //排序，因为list为bidirectional_iterator，而STL的sort算法只接受RandomAccessIterator
+	                                                                //所以list必须有自己的sort函数
+	void merge(list<T>& x);                                         //merge将x合并到*this上，两个list内容都必须先经过递增排列
+	void reverse();                                                 //将*this的内容逆向重置
 
 
 protected:
@@ -218,4 +296,98 @@ inline void list<T, Alloc>::transfer(iterator position, iterator first, iterator
 		(*first.node).prev = tmp;
 	}
 }
+
+template<typename T,typename Alloc>
+inline void list<T, Alloc>::splice(iterator position, list<T>& right)
+{
+	//将list插到position之前
+	if(!right.empty())
+	     ransfer(position, right.begin(), right.end());
+}
+template<typename T, typename Alloc>
+inline void list<T, Alloc>::splice(iterator position, iterator i)
+{
+	//将一个元素插到position之前
+	iterator j = i;
+	++j;
+	if (position == i || position == j) return;
+	transfer(position, i, j);
+}
+template<typename T, typename Alloc>
+inline void list<T, Alloc>::splice(iterator position, iterator first, iterator last)
+{
+	if (first != last)
+		transfer(position, first, last);
+}
+
+template<typename T,typename Alloc>
+inline void list<T, Alloc>::sort()
+{
+	//采用quick sort进行快速排序
+	//如果是空链表或仅有一个元素，就不进行任何操作，使用size()==0/1判断较慢
+	if (node->next == node || node->next->next == node)
+		return;
+
+	//一些新的lists作为中介数据存放区
+	list<T, Alloc> carry;
+	list<T, Alloc> counter[64];
+	int fill = 0;
+	while (!empty())
+	{
+		carry.splice(carry.begin(), begin());
+		int i = 0;
+		while (i < fill && !counter[i].empty())
+		{
+			counter[i].merge(carry);
+			carry.swap(counter[i++]);
+		}
+		carry.swap(counter[i]);
+		if (i == fill) ++fill;
+	}
+
+	for (int i = 1; i < fill; ++i)
+		counter[i].merge(counter[i - 1]);
+	swap(counter[fill - 1]);
+}
+
+template<typename T,typename Alloc>
+inline void list<T, Alloc>::merge(list<T>& x)
+{
+	//将两个list按大小顺序合并至this链中
+	iterator first1 = begin();
+	iterator last1 = end();
+	iterator first2 = x.begin();
+	iterator last2 = x.end();
+
+	//前提是两个list都已经过递增排序
+	while (first1 != last1 && first2 != last2)
+	{
+		if (*first2 < *first1) {
+			iterator next = first2;
+			transfer(first1, first2, ++next);
+			first2 = next;
+		}
+		else
+			++first1;
+	}
+	//如果是2先处理完，1的就留着，1先处理完，则2的要链入1，确保其结果完整性
+	if (first2 != last2) 
+		transfer(last1, first2, last2);
+}
+
+template<typename T,typename Alloc>
+inline void list<T, Alloc>::reverse()
+{
+	if (node->next == node || node->next->next == node)
+		return;
+	for (int i = 0; i < size(); i++)
+	{
+		iterator first = begin();
+		iterator last = end();
+		--last;
+		transfer(begin(), last, end());
+	}
+}
+
+
 }
