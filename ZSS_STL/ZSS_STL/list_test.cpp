@@ -5,6 +5,8 @@ using namespace ZSS;
 int main()
 {
 	//没有逆向迭代器rbegin和rend，逆向迭代器的rend++意味着对其内部迭代器进行--(重载)
+	//sort没有加比较函数compare的方式
+
 	/*
 	//第一种，通过构造函数
     int myints[] = { 75,23,65,42,13 };
@@ -21,7 +23,7 @@ int main()
 	second.assign(first.begin(), first.end());  // 复制first给second
 	first.assign(myints, myints + 3);           // 将数组myints的内容添加给first
     for (list<int>::iterator it = mylist1.begin(); it != mylist1.end(); ++it)
-		   std::cout << ' ' << *it;
+		   std::std::std::std::std::cout << ' ' << *it;
     mylist1.push_front(200);
 	mylist1.pop_front();
     mylist1.push_back(1);
@@ -30,36 +32,21 @@ int main()
 	mylist1.insert(it, 2, 20);                   // 1 10 20 20 2 3 4 5
 	vector<int> myvector(2, 30);                //创建vector容器，并初始化为含有2个值为30的元素                
 	mylist1.insert(it, myvector.begin(), myvector.end());//将vector容器的值插入list中
-
+    it1 = mylist.erase(it1);
+    mylist1.erase(it1, it2);
+	first.swap(second);                         //交换元素
+    mylist.resize(5);
+	mylist.resize(8, 100);
+	mylist.resize(12);
+	mylist.clear();                             //清空list中的所有元素
+	mylist1.splice(it, mylist2);                // mylist1: 1 10 20 30 2 3 4   (mylist1:1 2 3 4 mylist2: 10 20 30)
+								                // mylist2 (empty) "it" 仍然指向数字2
+    mylist2.splice(mylist2.begin(), it);        // mylist1: 1 10 20 30 3 4
+	                                            // mylist2: 2
+    mylist.remove(x);                           //除去list中所有为x的元素
+	mylist.unique();                            //删除list中连续相同的元素
+    mylist.sort();                              //对list进行排序，不可调用STL algorithm sort
+    mylist.reverse();                           //倒序
 	*/
 
-	list<int> mylist;
-	list<int>::iterator it1, it2;
-
-	// set some values:
-	for (int i = 1; i < 10; ++i) mylist.push_back(i * 10);
-
-	// 10 20 30 40 50 60 70 80 90
-	it1 = it2 = mylist.begin(); 
-	                           // 10 20 30 40 50 60 70 80 90
-	advance(it2, 6);           // ^                 ^
-	++it1;                     //    ^              ^
-
-	it1 = mylist.erase(it1);   // 10 30 40 50 60 70 80 90
-							   //    ^           ^
-
-	it2 = mylist.erase(it2);   // 10 30 40 50 60 80 90
-							   //    ^           ^
-
-	++it1;                      //       ^       ^
-	--it2;                      //       ^    ^
-								//没有变量接收其返回值
-	mylist.erase(it1, it2);     // 10 30 60 80 90
-								//       ^
-	std::cout << "*it1 : " << *it1 << std::endl;
-	std::cout << "mylist contains:";
-	for (it1 = mylist.begin(); it1 != mylist.end(); ++it1)
-		std::cout << ' ' << *it1;
-
-	
 }

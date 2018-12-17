@@ -96,7 +96,6 @@ public:
 	}
 	~list(){
 		clear();
-		delete node;
 	}
 
 	void assign(size_type n,const T& x)
@@ -124,6 +123,12 @@ public:
 
 	void push_front(const T& x) { insert(begin(), x); }        //插入一个节点作为头结点
 	void push_back(const T& x) { insert(end(), x); }           //以push_back加入元素时，此函数内部调用insert()
+	void pop_front() { erase(begin()); }                        //移除头结点
+	void pop_back() {                                           //移除尾结点 尾结点自减然后上面的元素被释放
+		iterator tmp = end();
+		erase(--tmp);                                           
+	}
+
 	iterator insert(iterator position, const T& x)             //插入结点在position之前
 	{           
 		//在0 1 2 3 4 中3的位置插入99 结果为 0 1 2 99 3 4
@@ -191,10 +196,33 @@ public:
 		}
 		return last;
 	}
-	void pop_front() { erase(begin()); }                        //移除头结点
-	void pop_back() {                                           //移除尾结点 尾结点自减然后上面的元素被释放
-		iterator tmp = end();
-		erase(--tmp);                                           
+
+	void resize(size_type n,const T& x=T()) {
+		if (n > size()) {
+			//扩容
+			size_type diff = n - size();
+			while (diff != 0) {
+                insert(node, x);
+				diff--;
+			}
+		}
+		else if (n < size()) {
+			//保留前n个元素和node
+			size_type diff = size() - n;
+			link_type del = node;
+			while (diff != 0) {
+				del=del->prev;
+				--diff;
+			}
+			erase(del, node);
+		}
+		else  return;
+	}
+
+	void swap(list<T>& right){                                  //仅交换头结点
+		link_type node1 = node;
+		node = right.node;
+		right.node = node1;
 	}
 	void remove(const T& x);                                    //将值为x的所有元素删除
 	void unique();                                              //移除数值相同的连续元素至只剩一个
@@ -262,7 +290,7 @@ inline void list<T, Alloc>::remove(const T& x)
 	{
 		iterator next = first;
 		++next;
-		if (*first == x) earse(first);            //earse释放了node，构建iterator，iterator改变，即此时first里面的地址为无效地址 
+		if (*first == x) erase(first);            //earse释放了node，构建iterator，iterator改变，即此时first里面的地址为无效地址 
 		first = next;                             //用next给first赋值的含义为使fisrt指向同一个地址，&first和&next在整个过程中是不会改变的	                                    
 	}
 }
@@ -273,11 +301,11 @@ inline void list<T, Alloc>::unique() {
 	iterator last = end();
 	if (first == last) return;                    //空链表
 	iterator next = first;
-	while ((++next) != next)
+	while ((++next) != last)
 	{
 		if (*first == *next)  erase(next);
 		else first = next;
-		next = first;
+		next = first;                             //恢复next
 	}
 }
 
@@ -302,7 +330,7 @@ inline void list<T, Alloc>::splice(iterator position, list<T>& right)
 {
 	//将list插到position之前
 	if(!right.empty())
-	     ransfer(position, right.begin(), right.end());
+	     transfer(position, right.begin(), right.end());
 }
 template<typename T, typename Alloc>
 inline void list<T, Alloc>::splice(iterator position, iterator i)
@@ -339,7 +367,7 @@ inline void list<T, Alloc>::sort()
 		while (i < fill && !counter[i].empty())
 		{
 			counter[i].merge(carry);
-			carry.swap(counter[i++]);
+			carry.swap(counter[i++]);          //先用i，再进行++
 		}
 		carry.swap(counter[i]);
 		if (i == fill) ++fill;
@@ -348,6 +376,7 @@ inline void list<T, Alloc>::sort()
 	for (int i = 1; i < fill; ++i)
 		counter[i].merge(counter[i - 1]);
 	swap(counter[fill - 1]);
+
 }
 
 template<typename T,typename Alloc>
@@ -380,12 +409,20 @@ inline void list<T, Alloc>::reverse()
 {
 	if (node->next == node || node->next->next == node)
 		return;
+	/*
 	for (int i = 0; i < size(); i++)
 	{
 		iterator first = begin();
 		iterator last = end();
 		--last;
 		transfer(begin(), last, end());
+	}*/
+	iterator first = begin();
+	++first;
+	while (first != end()) {
+		iterator old = first;
+		++first;
+		transfer(begin(), old, first);
 	}
 }
 
