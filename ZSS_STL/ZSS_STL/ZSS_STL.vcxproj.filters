@@ -39,6 +39,9 @@
     <ClInclude Include="zss_list.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="zss_deque.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vector_test.cpp">

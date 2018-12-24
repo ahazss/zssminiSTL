@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClInclude Include="zss_alloc.h" />
     <ClInclude Include="zss_construct.h" />
+    <ClInclude Include="zss_deque.h" />
     <ClInclude Include="zss_iterator.h" />
     <ClInclude Include="zss_list.h" />
     <ClInclude Include="zss_uninitialized.h" />

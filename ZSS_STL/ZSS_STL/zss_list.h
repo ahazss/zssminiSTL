@@ -84,7 +84,7 @@ public:
 
 	list() { empty_initialize(); }                             //产生一个空链表
 	template<typename iter>
-	list(iter first, iter last)                          //复制[first,last)的内容给list
+	list(iter first, iter last)                                //复制[first,last)的内容给list
 	{                       
 		empty_initialize();
 		insert(node, first, last);
@@ -96,6 +96,7 @@ public:
 	}
 	~list(){
 		clear();
+		destroy_node(node);
 	}
 
 	void assign(size_type n,const T& x)
@@ -133,7 +134,7 @@ public:
 	{           
 		//在0 1 2 3 4 中3的位置插入99 结果为 0 1 2 99 3 4
 		//因为是在position插元素前，不用担心更新尾指针
-		link_type newnode = create_node(x);
+		link_type newnode = create_node(x);                    //实际上每个结点都是有动态申请的内存，但释放是把内存挂回去
 		newnode->next = position.node;
 		newnode->prev = position.node->prev;
 		position.node->prev->next = newnode;
@@ -246,7 +247,7 @@ protected:
 	void put_node(link_type p) { list_node_allocator::deallocate(p); }
 	//产生(配置并构造)一个结点，带有元素值
 	link_type create_node(const T& x) {
-		link_type p = get_node();
+		link_type p = get_node();                //这里的get_node和construct合起来实际上完成了new的功能
 		construct(&p->data, x);                  //全局函数,因为是把x的值给结点的data，所以传过去的地址为data的地址
 		                                         //->优先级高于& 运算子->的调用方式即为这样？？？？？？
 		return p;
@@ -425,6 +426,4 @@ inline void list<T, Alloc>::reverse()
 		transfer(begin(), old, first);
 	}
 }
-
-
 }

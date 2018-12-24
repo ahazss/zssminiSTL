@@ -45,7 +45,7 @@ int main()
 	                                            // mylist2: 2
     mylist.remove(x);                           //除去list中所有为x的元素
 	mylist.unique();                            //删除list中连续相同的元素
-    mylist.sort();                              //对list进行排序，不可调用STL algorithm sort
+     mylist.sort();                              //对list进行排序，不可调用STL algorithm sort
     mylist.reverse();                           //倒序
 	*/
 
