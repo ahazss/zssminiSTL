@@ -2,12 +2,13 @@
 #include"zss_vector.h"
 using namespace ZSS;
 
+/*
 int main()
 {
 	//没有逆向迭代器rbegin和rend，逆向迭代器的rend++意味着对其内部迭代器进行--(重载)
 	//sort没有加比较函数compare的方式
 
-	/*
+
 	//第一种，通过构造函数
     int myints[] = { 75,23,65,42,13 };
 	list<int> mylist1(myints, myints + 5);
@@ -47,6 +48,4 @@ int main()
 	mylist.unique();                            //删除list中连续相同的元素
      mylist.sort();                              //对list进行排序，不可调用STL algorithm sort
     mylist.reverse();                           //倒序
-	*/
-
-}
+}*/

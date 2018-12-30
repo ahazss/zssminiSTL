@@ -62,7 +62,7 @@ void uninitialized_fill(ForwardIterator first, ForwardIterator last,
 	                     const T& x)
 {
     //first指向输出端(欲初始化空间)的起始处，last结束处，x表示初值
-	__uninitialized_fill(first, last, x, value_tyoe(first));
+	__uninitialized_fill(first, last, x, value_type(first));
 }
 
 template<typename ForwardIterator, typename T,typename T1>
@@ -70,13 +70,13 @@ void __uninitialized_fill(ForwardIterator first, ForwardIterator last,
 	const T& x, T1*)
 {
 	typedef typename __type_traits<T1>::is_POD_type is_POD;
-	return __uninitialized_fill_aux(first, n, x, is_POD());
+	return __uninitialized_fill_aux(first, last, x, is_POD());
 }
 
 template<typename ForwardIterator, typename T>
 void __uninitialized_fill_aux(ForwardIterator first, ForwardIterator last, const T& x, __true_type)
 {
-     fill(first, last, x);               //交由高阶函数执行
+     std::fill(first, last, x);               //交由高阶函数执行
 }
 
 template<typename ForwardIterator, typename T>

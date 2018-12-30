@@ -127,6 +127,7 @@
     <ClInclude Include="zss_vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="deque_test.cpp" />
     <ClCompile Include="list_test.cpp" />
     <ClCompile Include="vector_test.cpp" />
     <ClCompile Include="zss_alloc.cpp" />
