@@ -4,6 +4,8 @@ using namespace ZSS;
 
 int main()
 {
+	//insert函数仍有一点小问题！
+	/*
 	deque<int> que;
 	que.push_back(1);
 	que.push_back(2);
@@ -28,7 +30,9 @@ int main()
 		std::cout << *ator << std::endl;
 	std::cout << "中间插入元素：";
 	std::cin >> a;
-	que.insert(que.begin() + 1, 1, a);    //第一个位置为迭代器位置，该程序插入的为在首位置之后、第一个元素之前插入。元素标号从第0个开始。 
+	ator = que.begin();
+	ator = ator + 2;
+	//que.insert(ator,a);    //第一个位置为迭代器位置，该程序插入的为在首位置之后、第一个元素之前插入。元素标号从第0个开始。 
 	std::cout << "队列遍历：" << std::endl;
 	for (ator = que.begin(); ator != que.end(); ator++)
 		std::cout << *ator << std::endl;
@@ -45,6 +49,6 @@ int main()
 	std::cout << "队列元素个数：" << que.size() << std::endl;
 	std::cout << "队列清0:" << std::endl;
 	que.clear();
-	std::cout << "队列元素个数：" << que.size() << std::endl;
-	return 0;
+	std::cout << "队列元素个数：" << que.size() << std::endl;*/
+
 }

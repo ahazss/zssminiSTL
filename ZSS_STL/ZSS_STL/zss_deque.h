@@ -93,7 +93,7 @@ struct __deque_iterator {
 		}
 		return *this;
 	}
-	self& operator+(difference_type n) const {
+	self operator+(difference_type n) const  {
 		self tmp = *this;                //必须要新建对象是因为+=给其自身，而+则可能为赋值给别的对象不可以用自身
 		return tmp += n;                 //调用+=
 	}
@@ -101,7 +101,7 @@ struct __deque_iterator {
 	self& operator-=(difference_type n) const {
 		return *this += -n;
 	}
-	self& operator-(difference_type n) const {
+	self operator-(difference_type n) const {
 		self tmp = *this;
 		return tmp -= n;
 	}
