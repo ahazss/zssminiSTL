@@ -1,6 +1,3 @@
-﻿  deque_test.cpp
-d:\ministl\zssministl\zss_stl\zss_stl\zss_deque.h(162): warning C4018: “>”: 有符号/无符号不匹配
-  d:\ministl\zssministl\zss_stl\zss_stl\zss_deque.h(161): note: 编译 类 模板 成员函数 "void ZSS::deque<int,alloc,0>::reserve_map_at_front(ZSS::deque<int,alloc,0>::size_type)" 时
-  d:\ministl\zssministl\zss_stl\zss_stl\zss_deque.h(311): note: 参见对正在编译的函数 模板 实例化“void ZSS::deque<int,alloc,0>::reserve_map_at_front(ZSS::deque<int,alloc,0>::size_type)”的引用
-  d:\ministl\zssministl\zss_stl\zss_stl\deque_test.cpp(7): note: 参见对正在编译的 类 模板 实例化 "ZSS::deque<int,alloc,0>" 的引用
+﻿  priority_queue_test.cpp
+d:\ministl\zssministl\zss_stl\zss_stl\priority_queue_test.cpp(10): warning C4018: “<”: 有符号/无符号不匹配
   ZSS_STL.vcxproj -> D:\miniSTL\zssminiSTL\ZSS_STL\Debug\ZSS_STL.exe

@@ -119,8 +119,12 @@
     <ClInclude Include="zss_alloc.h" />
     <ClInclude Include="zss_construct.h" />
     <ClInclude Include="zss_deque.h" />
+    <ClInclude Include="zss_algorithm.h" />
     <ClInclude Include="zss_iterator.h" />
     <ClInclude Include="zss_list.h" />
+    <ClInclude Include="zss_priority_queue.h" />
+    <ClInclude Include="zss_queue.h" />
+    <ClInclude Include="zss_stack.h" />
     <ClInclude Include="zss_uninitialized.h" />
     <ClInclude Include="zss_type_traits.h" />
     <ClInclude Include="zss_allocator.h" />
@@ -128,7 +132,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="deque_test.cpp" />
+    <ClCompile Include="heap_test.cpp" />
     <ClCompile Include="list_test.cpp" />
+    <ClCompile Include="priority_queue_test.cpp" />
+    <ClCompile Include="queue_test.cpp" />
+    <ClCompile Include="stack_test.cpp" />
     <ClCompile Include="vector_test.cpp" />
     <ClCompile Include="zss_alloc.cpp" />
   </ItemGroup>

@@ -13,6 +13,7 @@ public:
 	typedef value_type*     pointer;
 	typedef value_type*     iterator;
 	typedef value_type&     reference;
+	typedef const T*        const_reference;
 	typedef size_t          size_type;                         //在32位系统中size_t为4字节，64位系统中为8字节
 	typedef ptrdiff_t       difference_type;
 

@@ -4,6 +4,7 @@
 
 namespace ZSS {
 
+//C++中的list实际上是双向循环链表，非单向
 template<typename T>
 struct __list_node {
 	//双向链表

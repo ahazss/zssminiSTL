@@ -42,6 +42,18 @@
     <ClInclude Include="zss_deque.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="zss_stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="zss_queue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="zss_algorithm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="zss_priority_queue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vector_test.cpp">
@@ -54,6 +66,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="deque_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stack_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="queue_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="heap_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="priority_queue_test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

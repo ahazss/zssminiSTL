@@ -98,7 +98,7 @@ struct __deque_iterator {
 		return tmp += n;                 //调用+=
 	}
 
-	self& operator-=(difference_type n) const {
+	self& operator-=(difference_type n) {
 		return *this += -n;
 	}
 	self operator-(difference_type n) const {
@@ -128,6 +128,9 @@ public:
 	typedef size_t size_type;
 	typedef ptrdiff_t difference_type;
 	typedef __deque_iterator<T, T&, T*, BufSiz> iterator;
+	typedef __deque_iterator<T, const T&, const T*, BufSiz> const_iterator;
+	typedef typename const_iterator::reference const_reference;
+
 
 protected:
 	//专属空间配置器，大小为一个元素大小

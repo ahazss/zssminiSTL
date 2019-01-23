@@ -2,10 +2,10 @@
 #include"zss_deque.h"
 using namespace ZSS;
 
+/*
 int main()
 {
 	//insert函数仍有一点小问题！
-	/*
 	deque<int> que;
 	que.push_back(1);
 	que.push_back(2);
@@ -49,6 +49,6 @@ int main()
 	std::cout << "队列元素个数：" << que.size() << std::endl;
 	std::cout << "队列清0:" << std::endl;
 	que.clear();
-	std::cout << "队列元素个数：" << que.size() << std::endl;*/
+	std::cout << "队列元素个数：" << que.size() << std::endl;
 
-}
+}*/
