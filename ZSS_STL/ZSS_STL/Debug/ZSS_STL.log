@@ -1,3 +1,59 @@
-﻿  priority_queue_test.cpp
-d:\ministl\zssministl\zss_stl\zss_stl\priority_queue_test.cpp(10): warning C4018: “<”: 有符号/无符号不匹配
-  ZSS_STL.vcxproj -> D:\miniSTL\zssminiSTL\ZSS_STL\Debug\ZSS_STL.exe
+﻿  set_test.cpp
+d:\ministl\zssministl\zss_stl\zss_stl\zss_set.h(22): error C4996: 'std::identity<_Ty>': warning STL4003: The non-Standard std::identity struct is deprecated and will be REMOVED. You can define _SILENCE_IDENTITY_STRUCT_DEPRECATION_WARNING to acknowledge that you have received this warning.
+  d:\ministl\zssministl\zss_stl\zss_stl\zss_set.h(103): note: 参见对正在编译的 类 模板 实例化 "ZSS::set<Key,Compare,Alloc>" 的引用
+d:\ministl\zssministl\zss_stl\zss_stl\zss_set.h(5): error C2065: “less”: 未声明的标识符
+d:\ministl\zssministl\zss_stl\zss_stl\zss_set.h(5): error C2275: “Key”: 将此类型用作表达式非法
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(8): error C2974: 'ZSS::set' : 模板 对于 'Compare'是无效参数，应为类型
+  d:\ministl\zssministl\zss_stl\zss_stl\zss_set.h(7): note: 参见“ZSS::set”的声明
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(8): error C2514: “ZSS::set”: 类没有构造函数
+  d:\ministl\zssministl\zss_stl\zss_stl\zss_set.h(7): note: 参见“ZSS::set”的声明
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(10): error C2662: “rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::size_type ZSS::set<Key,Compare,Alloc>::size(void) const”: 不能将“this”指针从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(10): note: 原因如下: 无法从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(10): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(11): error C2662: “std::pair<rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::const_iterator,bool> ZSS::set<Key,Compare,Alloc>::insert(const Key &)”: 不能将“this”指针从“ZSS::set”转换为“ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(11): note: 原因如下: 无法从“ZSS::set”转换为“ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(11): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(12): error C2662: “rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::size_type ZSS::set<Key,Compare,Alloc>::size(void) const”: 不能将“this”指针从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(12): note: 原因如下: 无法从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(12): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(13): error C2662: “std::pair<rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::const_iterator,bool> ZSS::set<Key,Compare,Alloc>::insert(const Key &)”: 不能将“this”指针从“ZSS::set”转换为“ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(13): note: 原因如下: 无法从“ZSS::set”转换为“ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(13): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(14): error C2662: “rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::size_type ZSS::set<Key,Compare,Alloc>::size(void) const”: 不能将“this”指针从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(14): note: 原因如下: 无法从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(14): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(17): error C2974: 'ZSS::set' : 模板 对于 'Compare'是无效参数，应为类型
+  d:\ministl\zssministl\zss_stl\zss_stl\zss_set.h(7): note: 参见“ZSS::set”的声明
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(17): error C2955: “ZSS::set”: 使用 类 模板 需要 模板 参数列表
+  d:\ministl\zssministl\zss_stl\zss_stl\zss_set.h(7): note: 参见“ZSS::set”的声明
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(17): error C2662: “rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::const_iterator ZSS::set<Key,Compare,Alloc>::begin(void) const”: 不能将“this”指针从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(17): note: 原因如下: 无法从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(17): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(18): error C2974: 'ZSS::set' : 模板 对于 'Compare'是无效参数，应为类型
+  d:\ministl\zssministl\zss_stl\zss_stl\zss_set.h(7): note: 参见“ZSS::set”的声明
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(18): error C2955: “ZSS::set”: 使用 类 模板 需要 模板 参数列表
+  d:\ministl\zssministl\zss_stl\zss_stl\zss_set.h(7): note: 参见“ZSS::set”的声明
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(18): error C2662: “rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::const_iterator ZSS::set<Key,Compare,Alloc>::end(void) const”: 不能将“this”指针从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(18): note: 原因如下: 无法从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(18): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(20): warning C4552: ”<<“: 未使用表达式结果
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(24): error C2662: “rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::const_iterator ZSS::set<Key,Compare,Alloc>::begin(void) const”: 不能将“this”指针从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(24): note: 原因如下: 无法从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(24): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(24): error C2662: “rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::const_iterator ZSS::set<Key,Compare,Alloc>::end(void) const”: 不能将“this”指针从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(24): note: 原因如下: 无法从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(24): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(24): error C2672: “std::find”: 未找到匹配的重载函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(24): error C2780: “_InIt std::find(_InIt,const _InIt,const _Ty &)”: 应输入 3 个参数，却提供了 2 个
+  d:\vs\vc\tools\msvc\14.14.26428\include\xutility(3597): note: 参见“std::find”的声明
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(25): error C2662: “rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::const_iterator ZSS::set<Key,Compare,Alloc>::end(void) const”: 不能将“this”指针从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(25): note: 原因如下: 无法从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(25): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(29): error C2662: “rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::const_iterator ZSS::set<Key,Compare,Alloc>::find(const Key &) const”: 不能将“this”指针从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(29): note: 原因如下: 无法从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(29): note: 转换要求第二个用户定义的转换运算符或构造函数
+d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(30): error C2662: “rb_tree<Key,Key,std::identity<_Ty>,Compare,Alloc>::const_iterator ZSS::set<Key,Compare,Alloc>::end(void) const”: 不能将“this”指针从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc> &”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(30): note: 原因如下: 无法从“ZSS::set”转换为“const ZSS::set<Key,Compare,Alloc>”
+  d:\ministl\zssministl\zss_stl\zss_stl\set_test.cpp(30): note: 转换要求第二个用户定义的转换运算符或构造函数
+  test.cpp
+  正在生成代码...

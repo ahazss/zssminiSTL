@@ -1,6 +1,7 @@
 #include"zss_priority_queue.h"
 using namespace ZSS;
 
+/*
 int main()
 {
 	int ia[9] = { 0,1,2,3,4,8,9,3,5 };
@@ -19,3 +20,4 @@ int main()
 
 	return 0;
 }
+*/

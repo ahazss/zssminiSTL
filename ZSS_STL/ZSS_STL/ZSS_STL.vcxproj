@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -122,8 +122,11 @@
     <ClInclude Include="zss_algorithm.h" />
     <ClInclude Include="zss_iterator.h" />
     <ClInclude Include="zss_list.h" />
+    <ClInclude Include="zss_pair.h" />
     <ClInclude Include="zss_priority_queue.h" />
     <ClInclude Include="zss_queue.h" />
+    <ClInclude Include="zss_RB_tree.h" />
+    <ClInclude Include="zss_set.h" />
     <ClInclude Include="zss_stack.h" />
     <ClInclude Include="zss_uninitialized.h" />
     <ClInclude Include="zss_type_traits.h" />
@@ -136,7 +139,10 @@
     <ClCompile Include="list_test.cpp" />
     <ClCompile Include="priority_queue_test.cpp" />
     <ClCompile Include="queue_test.cpp" />
+    <ClCompile Include="rbtree_test.cpp" />
+    <ClCompile Include="set_test.cpp" />
     <ClCompile Include="stack_test.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="vector_test.cpp" />
     <ClCompile Include="zss_alloc.cpp" />
   </ItemGroup>
