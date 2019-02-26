@@ -3,7 +3,7 @@
 #include"zss_RB_tree.h"
 
 using namespace ZSS;
-
+/*
 int main()
 {
 	rb_tree<int, int, std::identity<int>, std::less<int>> itree,itree2;
@@ -43,4 +43,4 @@ int main()
 	std::cout << std::endl;
 
 	return 0;
-}
+}*/

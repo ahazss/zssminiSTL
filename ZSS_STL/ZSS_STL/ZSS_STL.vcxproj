@@ -134,6 +134,7 @@
     <ClInclude Include="zss_vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="algorithm_test.cpp" />
     <ClCompile Include="deque_test.cpp" />
     <ClCompile Include="heap_test.cpp" />
     <ClCompile Include="list_test.cpp" />
@@ -142,7 +143,6 @@
     <ClCompile Include="rbtree_test.cpp" />
     <ClCompile Include="set_test.cpp" />
     <ClCompile Include="stack_test.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="vector_test.cpp" />
     <ClCompile Include="zss_alloc.cpp" />
   </ItemGroup>

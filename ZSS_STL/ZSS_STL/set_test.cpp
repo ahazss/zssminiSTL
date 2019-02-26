@@ -1,11 +1,11 @@
 #include"zss_set.h"
 using namespace ZSS;
-
+/*
 int main()
 {
 	int i;
 	int ia[5] = { 0,1,2,3,4 };
-	set<int> iset(ia, ia + 5);
+	set<int> iset(ia,ia+5);
 	
 	std::cout << iset.size() << std::endl;
 	iset.insert(3);
@@ -32,4 +32,4 @@ int main()
 
 	//企图通过迭代器来改变set元素是不被允许的
 	//*ite1=9;
-}
+}*/

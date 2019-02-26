@@ -1,9 +1,10 @@
 #pragma once
+#include<iostream>
 #include"zss_iterator.h"
 
 
-namespace ZSS {
 
+namespace ZSS {
 
 
 	//heap algorithms
@@ -133,5 +134,171 @@ namespace ZSS {
 	}
 
 
+
+	//accumulate 两个版本
+	//不带第三参数时为累加,BinaryOperation为二元操作符
+	template <typename InputIterator, typename T>
+	T accumulate(InputIterator first, InputIterator last, T init)
+	{
+		for (; first != last; ++first)
+			init = init + *first;
+		return init;
+	}
+
+	template <typename InputIterator, typename T, typename BinaryOperation>
+	T accumulate(InputIterator first, InputIterator last, T init, BinaryOperation binary_op)
+	{
+		for (; first != last; ++first)
+			init = binary_op(init, *first);   //对每一个元素执行二元操作
+		return init;
+	}
+
+	//adjacent不带第三参数时，用来计算[first,last)中相邻元素的差值
+	template <typename InputIterator, typename OutputIterator>
+	OutputIterator adjacent_difference(InputIterator first, InputIterator last, OutputIterator result)
+	{
+		if (first == last) return result;
+		*result = *first;                   //先记录第一个元素
+		typename iterator_traits<InputIterator>::value_type value = *first;
+		while (++first != last) {           //遍历整个区间
+			typename iterator_traits<InputIterator>::value_type tmp = *first;
+			*++result = tmp - value;
+			value = tmp;
+		}
+		return ++result;
+	}
+
+	template<typename InputIterator, typename OutputIterator, typename BinaryOperation>
+	OutputIterator adjacent_difference(InputIterator first, InputIterator last, OutputIterator result, BinaryOperation binary_op)
+	{
+		if (first == last) return result;
+		*result = *first;                   //先记录第一个元素
+		typename iterator_traits<InputIterator>::value_type value = *first;
+		while (++first != last) {           //遍历整个区间
+			typename iterator_traits<InputIterator>::value_type tmp = *first;
+			*++result = binary_op(tmp,value);
+			value = tmp;
+		}
+		return ++result;
+	}
+
+	template <typename InputIterator1, typename InputIterator2, typename T>
+	T inner_product(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, T init)
+	{
+		//以第一序列之元素个数为依据，将两个序列都走一遍
+		for (; first1 != last1; ++first1, ++first2)
+			init = init + (*first1*(*first2));         //执行两个序列的一般内积
+		return init;
+	}
+
+	template <typename InputIterator1, typename InputIterator2, typename T,
+	          typename BinaryOperation1, typename BinaryOperation2>
+	T inner_product(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, T init,
+	                BinaryOperation1 binary_op1,BinaryOperation2 binary_op2)
+	{
+		//以第一序列之元素个数为依据，将两个序列都走一遍
+		for (; first1 != last1; ++first1, ++first2)
+			init = binary_op1(init, binary_op2(*first1, *first2));         
+		//以外界提供的仿函数来取代第一版本中的operator*和operator+
+		return init;
+	}
+
+
+	//partial_sum用于计算局部总和
+	template <typename InputIterator, typename OutputIterator>
+	OutputIterator partial_sum(InputIterator first, InputIterator last, OutputIterator result)
+	{
+		if (first == last) return result;
+		*result = *first;
+		typename iterator_traits<InputIterator>::value_type value = *first;
+		while (++first != last) {           //遍历整个区间
+			value = value + *first;         //前n个元素的总和
+			*++result = value;              //指定给目的端
+		}
+		return ++result;                    //返回输出区间最尾端位置
+	}
+
+	template <typename InputIterator, typename OutputIterator, typename BinaryOperation>
+	OutputIterator partial_sum(InputIterator first, InputIterator last, OutputIterator result,BinaryOperation binary_op)
+	{
+		if (first == last) return result;
+		*result = *first;
+		typename iterator_traits<InputIterator>::value_type value = *first;
+		while (++first != last) {           //遍历整个区间
+			value = binary_op(value,*first);
+			*++result = value;
+		}
+		return ++result;
+	}
+
+	/*
+	template<typename T,typename Integer>
+	inline T power(T x, Integer n) {
+		return power(x, n, (std::multiplies<T>()));
+	}
+
+	//版本2，幂次方，若指定为乘法运算，则当n>=0时返回1x^n
+	template<typename T,typename Integer,typename MonoidOperation>
+	T power(T x, Integer n, MonoidOperation op) {
+		if (n == 0)
+			return 1;               //取出证同元素   ？？？？
+		else {
+			while ((n & 1) == 0) {    //n为偶数
+				n >> 1;
+				x = op(x, x);
+			}
+			T result = x;
+			n >>= 1;
+			while (n != 0) {
+				x = op(x, x);
+				if ((n & 1) != 0)
+					result = op(result, x);
+				n >>= 1;
+			}
+			return result;
+		}
+	}*/
+
+	//mismatch，平行比较两个序列，指出两者的第一个不匹配点，返回一对迭代器，分别指向两序列中的不匹配点
+	template <typename InputIterator1, typename InputIterator2>
+	std::pair<InputIterator1, InputIterator2> mismatch(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2) {
+		//以下，如果序列1走完，就结束，如果序列一和序列二的对应元素相等，就结束
+		//序列1的元素必须多于2的元素，否则结果无可预期
+		while (first1 != last1 && *first1 == *first2) {
+			++first1;
+			++first2;
+		}
+		return std::pair<InputIterator1, InputIterator2>(first1, first2);
+	}
+
+	template <typename InputIterator1, typename InputIterator2,typename BinaryPredicate>
+	std::pair<InputIterator1, InputIterator2> mismatch(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2,BinaryPredicate binary_pred) {
+		//允许用户自定义比较操作
+		while (first1 != last1 && binary_pred(*first1, *first2)) {
+			++first1;
+			++first2;
+		}
+		return std::pair<InputIterator1, InputIterator2>(first1, first2);
+	}
+
+	//equal 若两个序列在[first,last)区间内相等，返回true
+	//若第二序列的元素比较多，多出来的元素不予考虑，所以调用equal前，先判断两个序列元素个数是否相等
+	template<typename InputIterator1, typename InputIterator2>
+	inline bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2) 
+	{
+		for (; first1 != last1; ++first1, ++first2)
+			if (*first1 != *first2)
+				return false;
+		return true;
+	}
+
+	template<typename InputIterator1, typename InputIterator2,typename BinaryPredicate>
+	inline bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2,BinaryPredicate binary_pred)
+	{
+		for (; first1 != last1; ++first1, first2)
+			if (!binary_pred(*first1, *first2))
+				return false;
+		return true;
+	}
 
 }

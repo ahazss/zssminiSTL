@@ -92,10 +92,10 @@
     <ClCompile Include="rbtree_test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="set_test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="set_test.cpp">
+    <ClCompile Include="algorithm_test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

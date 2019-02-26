@@ -1,4 +1,5 @@
 #pragma once
+#define _SILENCE_IDENTITY_STRUCT_DEPRECATION_WARNING
 #include"zss_RB_tree.h"
 
 namespace ZSS {
