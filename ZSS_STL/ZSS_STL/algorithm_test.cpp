@@ -1,4 +1,5 @@
 #include<iostream>
+#include"zss_deque.h"
 #include"zss_algorithm.h"
 #include"zss_vector.h"
 using namespace ZSS;
@@ -29,6 +30,39 @@ int main()
 	//std::cout << equal(iv1.begin(), iv1.end(), iv2.begin());
 	//std::cout << equal(iv1.begin(), iv1.end(), &ia[3]);
 	//std::cout << equal(iv1.begin(), iv1.end(), &ia[3], std::less<int>());
+
+	fill(iv1.begin(), iv1.end(), 9);       //区间内全部填9
+	for_each(iv1.begin(), iv1.end(), display<int>());
+
+	fill_n(iv1.begin(), 3, 7);             //从迭代器所指位置开始，填3个7
+	for_each(iv1.begin(), iv1.end(), display<int>());
+	std::cout << std::endl;
+
+	vector<int>::iterator ite1 = iv1.begin();         //指向7
+	vector<int>::iterator ite2 = ite1;
+	advance(ite2, 3);                                 //指向9
+	iter_swap(ite1, ite2);
+	std::cout << *ite1 << ' ' << *ite2 << std::endl;
+	for_each(iv1.begin(), iv1.end(), display<int>());
+	std::cout << std::endl;
+	//以下取两者之大者
+	std::cout << max(*ite1, *ite2) << std::endl;
+	//以下取两者之小者
+	std::cout << min(*ite1, *ite2) << std::endl;
+
+	swap(*iv1.begin(), *iv2.begin());   //将两数值对调
+	for_each(iv1.begin(), iv1.end(), display<int>());
+	std::cout << std::endl;
+	for_each(iv2.begin(), iv2.end(), display<int>());
+
+
+	int ia[] = { 0,1,2,3,4,5,6,7,8 };
+
+	//以下输出区间的终点与输入区间重叠，结果没有问题
+	copy(ia + 2, ia + 7, ia);
+	for_each(ia, ia + 9, display<int>());       // 2 3 4 5 6 5 6 7 8
+	std::cout << std::endl;
+
 
 
 

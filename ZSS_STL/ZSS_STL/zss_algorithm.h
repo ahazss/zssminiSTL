@@ -301,4 +301,147 @@ namespace ZSS {
 		return true;
 	}
 
+	template <typename ForwardIterator,typename T>
+	void fill(ForwardIterator first, ForwardIterator last, const T& value) {
+		for (; first != last; ++first) {       //迭代走过整个区间
+			*first = value;                    //设定新值
+		}
+	}
+
+	template <typename OutputIterator, typename Size, typename T>
+	OutputIterator fill_n(OutputIterator first, Size n, const T& value) {
+		for (; n > 0; --n, ++first)            //迭代走过整个区间
+			*first = value;                    //设定新值
+		return first;
+	}
+
+	template<typename OutputIterator,typename Comp>
+	void for_each(OutputIterator first, OutputIterator last, Comp comp) {
+		for (; first != last; ++first) {
+			comp(*first);
+		}
+	}
+
+	template<typename ForwardIterator1,typename ForwardIterator2>
+	inline void iter_swap(ForwardIterator1 a, ForwardIterator2 b) {
+		//必须知道类型，否则无法创建tmp变量
+		typename iterator_traits<ForwardIterator1>::value_type tmp = *a;
+		*a = *b;
+		*b = tmp;
+	}
+
+	template<typename T>
+	inline const T& max(const T& a, const T& b) {
+		return a < b ? b : a;
+	}
+
+	template<typename T,typename Compare>
+	inline const T& max(const T& a, const T& b,Compare comp) {
+		return comp(a, b) ? b : a;
+	}
+
+	template<typename T>
+	inline const T& min(const T& a, const T& b) {
+		return a > b ? b : a;
+	}
+
+	template<typename T, typename Compare>
+	inline const T& min(const T& a, const T& b, Compare comp) {
+		return comp(b, a) ? b : a;
+	}
+
+	template<typename T>
+	inline void swap(T& a, T& b) {
+		T tmp = a;
+		a = b;
+		b = tmp;
+	}
+
+	//copy 更改的是[result,result+last-first)中迭代器所指的对象，而非更改迭代器本身
+	//会为输出区间的元素赋予新值，不可改变迭代器本身
+	//完全泛化版本
+	template<typename InputIterator, typename OutputIterator>
+	inline OutputIterator copy(InputIterator first, InputIterator last, OutputIterator result)
+	{
+		return __copy_dispatch<InputIterator, OutputIterator>()(first, last, result);
+		//__copy_dispatch有一个完全泛化版本和两个偏特化版本
+	}
+
+	//多载函数，针对原生指针(可视为一种特殊的迭代器)const char* 和const wchar_t*，进行内存直接拷贝操作
+	inline char* copy(const char* first, const char* last, char* result) {
+		memmove(result, first, last - first);
+		return result + (last - first);
+	}
+	inline wchar_t* copy(const wchar_t* first, const wchar_t* last, wchar_t* result) {
+		memmove(result, first, sizeof(wchar_t)*(last - first));
+		return result + (last - first);
+	}
+
+	template<typename InputIterator, typename OutputIterator>
+	struct __copy_dispatch
+	{
+		OutputIterator operator()(InputIterator first, InputIterator last, OutputIterator result) {
+			return __copy(first, last, result, iterator_category(first));
+			//完全泛化版根据迭代器种类的不同，调用了不同的__copy(),为的是不同种类的迭代器所使用的循环条件不同，有快慢之分
+		}
+	};
+
+	template<typename T>
+	struct __copy_dispatch<T*, T*>
+	{
+		T* operator()(T* first, T* last, T* result) {
+			typedef typename __type_traits<T>::has_trivial_assignment_operator t;    //据是否有trivial_assignment_operator来调用不同函数
+			return __copy_t(first, last, result, t());
+		}
+	};
+
+	template<typename T>
+	struct __copy_dispatch<const T*, T*>
+	{
+		T* operator()(const T* first,const T* last, T* result) {
+			typedef typename __type_traits<T>::has_trivial_assignment_operator t;
+			return __copy_t(first, last, result, t());
+		}
+	};
+
+	//__copy()(根据迭代器种类不同进行分类)
+	//InputIterator版本,Input_iterator_tag用于进行重载调用相应函数
+	template<typename InputIterator,typename OutputIterator>
+	inline OutputIterator __copy(InputIterator first, InputIterator last, OutputIterator result, input_iterator_tag)
+	{
+		//以迭代器是否相同，决定循环是否继续，速度慢
+		for (; first != last; ++result, ++first)
+			*result = *first;
+		return result;
+	}
+
+	//RandomAccessIterator 版本
+	template<typename RandomAccessIterator, typename OutputIterator>
+	inline OutputIterator __copy(RandomAccessIterator first, RandomAccessIterator last, OutputIterator result, random_access_iterator_tag)
+	{
+		return __copy_d(first, last, result, distance_type(first));
+	}
+
+	template<typename RandomAccessIterator, typename OutputIterator,typename Distance>
+	inline OutputIterator __copy_d(RandomAccessIterator first, RandomAccessIterator last, OutputIterator result, Distance*)
+	{
+		for (Distance n = last - first; n > 0; --n, ++result, ++first)
+			*result = *first;
+		return result;
+	}
+
+	template<typename T>
+	inline T* __copy_t(const T* first, const T* last, T* result, __true_type)
+	{
+		//有trivial
+		memmove(result, first, sizeof(T)*(last - first));
+		return result + (last - first);
+	}
+
+	template<typename T>
+	inline T* __copy_t(const T* first, const T* last, T* result, __false_type)
+	{
+		//有trivial,原生指针是一种RandomAccessIterator 所以交给__copy_d()完成
+		return _copy_d(first, last, result, (ptrdiff_t*)0);
+	}
 }

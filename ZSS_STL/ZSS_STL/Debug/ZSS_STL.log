@@ -1,17 +1,5 @@
 ﻿  algorithm_test.cpp
-d:\ministl\zssministl\zss_stl\zss_stl\algorithm_test.cpp(31): error C2668: “ZSS::equal”: 对重载函数的调用不明确
-  d:\ministl\zssministl\zss_stl\zss_stl\zss_algorithm.h(296): note: 可能是“bool ZSS::equal<int*,int*,std::less<int>>(InputIterator1,InputIterator1,InputIterator2,BinaryPredicate)”
-          with
-          [
-              InputIterator1=int *,
-              InputIterator2=int *,
-              BinaryPredicate=std::less<int>
-          ]
-  d:\vs\vc\tools\msvc\14.14.26428\include\xutility(3179): note: 或    “bool std::equal<int*,int*,std::less<int>>(const _InIt1,const _InIt1,const _InIt2,_Pr)”[使用参数相关的查找找到]
-          with
-          [
-              _InIt1=int *,
-              _InIt2=int *,
-              _Pr=std::less<int>
-          ]
-  d:\ministl\zssministl\zss_stl\zss_stl\algorithm_test.cpp(31): note: 尝试匹配参数列表“(int *, int *, int *, std::less<int>)”时
+  heap_test.cpp
+  priority_queue_test.cpp
+  正在生成代码...
+  ZSS_STL.vcxproj -> D:\miniSTL\zssminiSTL\ZSS_STL\Debug\ZSS_STL.exe
